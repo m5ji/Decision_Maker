@@ -57,8 +57,14 @@
     if (([[segue identifier] isEqualToString:@"next"]) || ([[segue identifier] isEqualToString:@"return"]))
     {
         GLKitViewController *glkitview = (GLKitViewController *)segue.destinationViewController;
+        //Check if the question is a repeated question
         if ([question_content isEqualToString:temp]) {
             glkitview._answers = @"You already asked this question :p";
+            return;
+        }
+        //Check if the question ends with "?"
+        if (![question_content hasSuffix:@"?"]) {
+            glkitview._answers = @"A question mark is needed :)";
             return;
         }
         else {
